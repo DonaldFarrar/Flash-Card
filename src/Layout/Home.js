@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import { listDecks } from "../utils/api";
 import DeckList from "./Deck/DeckList";
 
 function Home() {
+  const history = useHistory();
   const [allDecks, setAllDecks] = useState([]);
 
   function handleButtonClick(event) {
     event.preventDefault();
-    console.log(event.target.name);
+    history.push("/decks/new");
   }
 
   useEffect(() => {

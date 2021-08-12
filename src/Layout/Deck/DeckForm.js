@@ -7,9 +7,10 @@ function DeckForm({
 }) {
   const [deck, setDeck] = useState(initialState);
 
-  function changeHandler(event) {
-    setDeck((prevDeck) => ({
-      ...prevDeck, //event.target.value.name?????
+  function changeHandler({ target: { name, value } }) {
+    setDeck((prevState) => ({
+      ...prevState,
+      [name]: value,
     }));
   }
 

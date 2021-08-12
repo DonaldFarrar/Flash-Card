@@ -1,12 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Header from "./Header";
-import NotFound from "./NotFound";
-import Home from "./Home";
-import DeckView from "./Deck/DeckView";
+
+
 
 function DeckListItem({ deck: { id, name, description, cards }, index }) {
-  console.log(id === 1);
+ 
   return (
     //create a card with view, study and delete buttons
     <div className="card container">
