@@ -1,30 +1,25 @@
-import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import React from "react";
+import { deleteDeck } from "../utils/api";
 
-function DeleteButton() {
-  //const result = window.confirm(message);
-  const history = useHistory();
-  const [deleteDeck, setDeleteDeck] = useState([]);
-  const handleClick = (event) =>
-    setDeleteDeck([...deleteDeck, event.target.value]);
-
-  history.push("/");
-
+function DeleteButton({ id, onComplete }) {
   return (
-    <section>
-      <div>
-        <button
-          type="button"
-          className="btn btn-danger btn-lg"
-          name="Delete"
-          onClick={handleClick}
-        >
-          <div>{}</div>
-          Delete
-        </button>
-      </div>
-    </section>
+    <button
+      className="btn btn-danger text-center float-right"
+      onClick={() => {
+        if (
+          window.confirm(
+            "Delete this deck?\n\nYou will not be able to recover it."
+          )
+        ) {
+          deleteDeck(id, null)
+            .then(onComplete)
+            .catch((error) => {
+            });
+        }
+      }}
+    >
+      <span className="oi oi-trash" />
+    </button>
   );
 }
-
 export default DeleteButton;
