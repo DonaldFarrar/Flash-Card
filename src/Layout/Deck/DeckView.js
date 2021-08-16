@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { readDeck } from "../../utils/api";
-import DeleteButton from "./DeleteButton";
+import DeleteButton from "../DeleteButton";
 import { useHistory } from "react-router-dom";
 
 import CardList from "../Card/CardList";

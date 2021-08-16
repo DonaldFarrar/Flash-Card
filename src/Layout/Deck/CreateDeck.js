@@ -16,13 +16,20 @@ function CreateDeck() {
   }
   return (
     <>
-      <div>
-        <Link to="/deck/new">
-          <span className="oi oi-plus"></span>
-          <h1>Create Deck</h1>
-          <DeckForm onCancel={cancel} onSubmit={submitHandler} />
-        </Link>
-      </div>
+      <nav aria-label="breadcrumb">
+        <ol className="breadcrumb">
+          <li className="breadcrumb-item">
+            <Link to="/">
+              <span className="oi oi-home" /> Home
+            </Link>
+          </li>
+          <li className="breadcrumb-item active" aria-current="page">
+            Create Deck
+          </li>
+        </ol>
+      </nav>
+      <h1>Create Deck</h1>
+      <DeckForm onCancel={cancel} onSubmit={submitHandler} />
     </>
   );
 }

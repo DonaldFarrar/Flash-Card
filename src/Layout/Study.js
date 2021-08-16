@@ -1,35 +1,44 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import StudyCard from "./StudyCard";
+import { readDeck } from "../utils/api";
 
-function Study({ decks }) {
-  const initialState = {
-    cardNumber: 0,
-    flipped: false,
-    hasBeenFlipped: false,
-  };
+function Study() {
+  const { deckId } = useParams();
 
-  const [state, setState] = useState({...initialState});
+  const [deck, setDeck] = useState([]);
 
-  const updateState = (key, value) =>
-  setState((current) => ({ ...current, [key]: value }));
+  useEffect(() => {
+    const abortController = new AbortController();
+    async function fetchData() {
+      const response = await readDeck(deckId, abortController.signal);
+      setDeck(response);
+    }
+    fetchData();
+    return () => abortController.abort();
+  }, [deckId]);
 
-  if(decks) {
+  //PSEUDO Code
+  //frame work of the HTML
+  //Bootstrap Card
+  //Card X of Y
+  //state variable of the view front or back of the card
+  //managing the next button is visible
+  //Call readDeck in useEffect
+  //window.confirm for the restart prompt
+  //breadcrumb navigation
+  //flip button and a next button
+  if (deck) {
     return (
       <div>
         <div className="row">
           <div className="col-12">
-            <h1>Study: {decks.name}</h1>
+            <h1>Study: {deck.name}</h1>
           </div>
         </div>
         <div className="row">
           <div className="col-12">
-            <StudyCard
-              deckId={decks.id}
-              card={decks.cards[state.cardNumber]}
-              total={decks.cards.length}
-              state={state}
-              updateState={updateState}
-            />
+            <StudyCard />
           </div>
         </div>
       </div>

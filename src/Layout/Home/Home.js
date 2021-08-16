@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { listDecks } from "../../utils/api";
-import DeckList from "../Layout/Deck/DeckList";
+import DeckList from "../Home/DeckList";
 
 function Home() {
   const history = useHistory();
