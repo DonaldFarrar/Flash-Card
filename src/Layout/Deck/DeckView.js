@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { readDeck } from "../../utils/api";
-import DeleteButton from "../DeleteButton";
-import { useHistory } from "react-router-dom";
 
 import CardList from "../Card/CardList";
 
 function DeckView() {
-  const history = useHistory();
   const [deck, setDeck] = useState([]);
   const { deckId } = useParams();
   console.log(deckId);
@@ -55,10 +52,6 @@ function DeckView() {
               <div className="col d-flex justify-content-end p-0">
                 <button className="btn btn-danger">
                   <span className="oi oi-trash"></span>
-                  <DeleteButton
-                    id={deck.id}
-                    onComplete={() => history.push("/")}
-                  />
                 </button>
               </div>
             </div>

@@ -1,99 +1,56 @@
-import React from "react";
-import { Link, useHistory } from "react-router-dom";
+import React, { useState } from "react";
 
-function StudyCardSide({
-  flipped,
-  front,
-  text,
-  cardNumber,
-  total,
-  updateState,
-  showNextButton,
-}) {
-  const history = useHistory();
+function StudyCard({ cards, index, setIndex, deckId }) {
+  const [flip, setFlip] = useState(false);
+  const [showCard, setShowCard] = useState(true);
 
-  return (
-    <div className={front ? "card-fr" : "card-bk bg-dark text-white"}>
-      <div className="card-body">
-        <h3 className="card-title">
-          {front !== flipped ? "Card" : "Card"} {cardNumber + 1} of {total}
-        </h3>
-        <p className="card-text">{text}</p>
-        <button
-          className={
-            front ? "btn btn-outline-dark" : "btn btn-outline-light text-white"
-          }
-          onClick={() => {
-            updateState("flipped", front);
-            updateState("hasBeenFlipped", true);
-          }}
-        >
-          {front !== flipped ? "Flip" : "Flop"}
-        </button>
-        {showNextButton && (
-          <button
-            className={
-              "btn btn-outline-primary ml-2" + (front ? "" : "text=white")
-            }
-            onClick={() => {
-              if (cardNumber + 1 !== total) {
-                updateState("flipped", false);
-                updateState("cardNumber", cardNumber + 1);
-                updateState("hasBeenFlipped", false);
-              } else {
-                if (
-                  window.confirm(
-                    "Restart cards?\n\nClick 'cancel' to return to the home page."
-                  )
-                ) {
-                  updateState("flipped", false);
-                  updateState("cardNumber", 0);
-                  updateState("hasBeenFlipped", false);
-                } else {
-                  history.push("/");
-                }
-              }
-            }}
-          >
-            {front !== flipped ? "Next" : "Next"}
-          </button>
-        )}
-      </div>
-    </div>
-  );
-}
-function StudyCard({
-  deckId,
-  card: { front, back } = {},
-  total,
-  state: { flipped, hasBeenFlipped, cardNumber },
-  updateState,
-}) {
-  if (total <= 2) {
+  const flipButton = (event) => {
+    event.preventDefault();
+    //false = Front of Card
+    //true = Back of Card
+    setFlip(!flip);
+    setShowCard(!showCard);
+  };
+
+  const nextButton = (event) => {
+    setFlip(!flip);
+    setIndex(index + 1);
+  };
+
+  const ShowStudyCards = function () {
     return (
-      <div>
-        <h2>Not Enough Cards!</h2>
-        <p>
-          You need at least 3 cards to study. There are {total} in this deck.
-        </p>
-        <Link className="btn btn-primary" to={`/decks/${deckId}/cards/new`}>
-          <span className="oi oi-plus" /> Add Cards
-        </Link>
+      <div className="card container">
+        <div className="card-body">
+          <div className="row">
+            <h3 className="col">
+              Card {index + 1} of {cards.length}
+            </h3>
+          </div>
+          {showCard === true ? (
+            <div className="row pl-4">{cards[index].front}</div>
+          ) : (
+            <div className="row pl-4">{cards[index].back}</div>
+          )}
+          <div className="row">
+            <div className="col-12">
+              <div className="btn btn-secondary m-2" onClick={flipButton}>
+                Flip
+              </div>
+              {flip && (
+                <div className="btn btn-primary m-2" onClick={nextButton}>
+                  Next
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
       </div>
     );
-  }
+  };
+
   return (
-    <div className={"card card-f h-100" + (flipped ? "fl" : "")}>
-      <StudyCardSide
-        flipped={flipped}
-        front={!flipped}
-        text={flipped ? back : front}
-        cardNumber={cardNumber}
-        total={total}
-        showNextButton={hasBeenFlipped}
-        updateState={updateState}
-      />
-    </div>
+    <div>{cards.length >= 3 ? <ShowStudyCards /> : <p>Need more card!</p>}</div>
   );
 }
+
 export default StudyCard;

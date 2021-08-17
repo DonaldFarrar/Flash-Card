@@ -1,34 +1,39 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import StudyCard from "./StudyCard";
 import { readDeck } from "../utils/api";
+import StudyCard from "./StudyCard";
 
 function Study() {
   const { deckId } = useParams();
 
   const [deck, setDeck] = useState([]);
+  const [cards, setCards] = useState([]);
+  const [index, setIndex] = useState(-1);
 
+  //grabs decks info and return it to a set deck variable
   useEffect(() => {
     const abortController = new AbortController();
-    async function fetchData() {
-      const response = await readDeck(deckId, abortController.signal);
-      setDeck(response);
+    async function getDeck() {
+      setDeck(await readDeck(deckId, abortController.signal));
     }
-    fetchData();
-    return () => abortController.abort();
+    getDeck();
   }, [deckId]);
 
-  //PSEUDO Code
-  //frame work of the HTML
-  //Bootstrap Card
-  //Card X of Y
-  //state variable of the view front or back of the card
-  //managing the next button is visible
-  //Call readDeck in useEffect
-  //window.confirm for the restart prompt
-  //breadcrumb navigation
-  //flip button and a next button
-  if (deck) {
+  //deck info is set to state
+  //variable containing the deck array
+  useEffect(() => {
+    const abortController = new AbortController();
+    if (deck.cards) {
+      setCards(deck.cards);
+      setIndex(0);
+    }
+    return () => {
+      abortController.abort();
+    };
+  }, [deck]);
+
+
+  if (index >= 0) {
     return (
       <div>
         <div className="row">
@@ -36,10 +41,13 @@ function Study() {
             <h1>Study: {deck.name}</h1>
           </div>
         </div>
-        <div className="row">
-          <div className="col-12">
-            <StudyCard />
-          </div>
+        <div>
+          <StudyCard
+          cards={cards}
+          index={index}
+          setIndex={setIndex}
+          deckId={deckId} 
+          />
         </div>
       </div>
     );
