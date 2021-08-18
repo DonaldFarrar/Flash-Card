@@ -1,10 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
-
-
+import { Link, useParams } from "react-router-dom";
+import DeleteButton from "./DeleteButton";
 
 function DeckListItem({ deck: { id, name, description, cards }, index }) {
- 
+  const { deckId } = useParams();
+
   return (
     //create a card with view, study and delete buttons
     <div className="card container">
@@ -27,7 +27,11 @@ function DeckListItem({ deck: { id, name, description, cards }, index }) {
           </div>
           <div className="col d-flex justify-content-end p-0">
             <button className="btn btn-danger">
-              <span className="oi oi-trash"></span>
+              <DeleteButton
+                destroy="deleteDeck"
+                deckId={deckId}
+                abortSignal={AbortSignal}
+              />
             </button>
           </div>
         </div>

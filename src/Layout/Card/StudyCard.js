@@ -1,8 +1,11 @@
 import React, { useState } from "react";
+import { Link, useHistory } from "react-router-dom";
+//import { useHistory } from "react-router-dom";
 
-function StudyCard({ cards, index, setIndex, deckId }) {
+function StudyCard({ cards, index, setIndex, deckId, deck }) {
   const [flip, setFlip] = useState(false);
   const [showCard, setShowCard] = useState(true);
+  //const history = useHistory();
 
   const flipButton = (event) => {
     event.preventDefault();
@@ -17,7 +20,21 @@ function StudyCard({ cards, index, setIndex, deckId }) {
     setIndex(index + 1);
   };
 
-  const ShowStudyCards = function () {
+  // function studyAgain() {
+  //   if (
+  //     window.confirm(
+  //       `Restart cards? \n\n Clicking cancel will return you to the home page`
+  //     )
+  //   ) {
+  //     setIndex(0);
+  //     setFlip(false);
+  //     setShowCard(true);
+  //   } else {
+  //     history.push("/");
+  //   }
+  // }
+
+  const ShowStudyCards = () => {
     return (
       <div className="card container">
         <div className="card-body">
@@ -49,7 +66,13 @@ function StudyCard({ cards, index, setIndex, deckId }) {
   };
 
   return (
-    <div>{cards.length >= 3 ? <ShowStudyCards /> : <p>Need more card!</p>}</div>
+    <div>
+      {cards.length >= 3 ? <ShowStudyCards /> : <p>Need more cards!</p>}
+      <button className="btn btn-primary">
+        <span className="oi oi-plus"></span>Add Cards
+        {/* <Link to={`/decks/${deck.id}/cards/new`}></Link> */}
+      </button>
+    </div>
   );
 }
 

@@ -53,6 +53,13 @@
       "back": "b",
       "deckId": 1,
       "id": 7
+    },
+    {
+      "cards": [],
+      "front": "fRONT OF cARD",
+      "back": "back",
+      "deckId": 1,
+      "id": 8
     }
   ]
 }
