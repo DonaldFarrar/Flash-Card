@@ -40,7 +40,8 @@ function StudyCard({ cards, index, setIndex, deckId }) {
   if (cards.length < 3) {
     return (
       <div>
-        <p>Need more cards!</p>
+        <p>
+          <span>Need more cards!</span></p>
         <Link className="btn btn-primary" to={`/decks/${deckId}/cards/new`}>
           <span className="oi oi-plus"></span> Add Cards
         </Link>
