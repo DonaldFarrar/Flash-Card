@@ -17,17 +17,18 @@ function CreateDeck() {
   return (
     <>
       <nav aria-label="breadcrumb">
-        <ol className="breadcrumb">
-          <li className="breadcrumb-item">
-            <Link to="/">
-              <span className="oi oi-home" /> Home
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item active" aria-current="page">
+            <Link to={"/"}>
+              <span className="oi oi-home"> Home </span>
             </Link>
           </li>
-          <li className="breadcrumb-item active" aria-current="page">
+          <li class="breadcrumb-item active" aria-current="page">
             Create Deck
           </li>
         </ol>
       </nav>
+
       <h1>Create Deck</h1>
       <DeckForm onCancel={cancel} onSubmit={submitHandler} />
     </>

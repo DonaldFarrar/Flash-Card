@@ -1,7 +1,9 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import DeleteButton from "../Home/DeleteButton";
 
 function CardListItem({ card: { id, front, back } }) {
+  const { cardId } = useParams();
   return (
     <div className="card container">
       <div className="card-body">
@@ -14,7 +16,11 @@ function CardListItem({ card: { id, front, back } }) {
             <span className="oi oi-eye"></span> Edit
           </Link>
           <button className="btn btn-danger">
-            <span className="oi oi-trash"></span>
+            <DeleteButton
+              destroy="deleteCard"
+              deckId={cardId}
+              abortSignal={AbortSignal}
+            />
           </button>
         </div>
       </div>

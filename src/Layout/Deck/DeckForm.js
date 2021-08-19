@@ -27,11 +27,10 @@ function DeckForm({
             <input
               type="text"
               id="name"
-              name="name"
               className="form-control"
               value={deck.name}
               required={true}
-              placeholder="Insert Creative Deck Name Here"
+              placeholder="Deck Name"
               onChange={changeHandler}
             />
           </div>
@@ -39,11 +38,10 @@ function DeckForm({
             <label htmlFor="description">Description</label>
             <textarea
               id="description"
-              name="description"
               className="form-control"
               rows="4"
               required={true}
-              placeholder="Write a brief description about this deck."
+              placeholder="Description about this deck."
               value={deck.description}
               onChange={changeHandler}
             />
