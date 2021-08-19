@@ -20,7 +20,8 @@ function EditCard() {
   }
 
   function doneButton() {
-    history.push(`/decks/${deck.id}`);
+    history.push(`/decks/${deckId}`);
+    history.go(0);
   }
 
   const result = card.id ? (

@@ -6,33 +6,29 @@ import CardList from "../Card/CardList";
 
 function DeckView() {
   const [deck, setDeck] = useState([]);
-  const [card, setCard] = useState([]);
   const { deckId } = useParams();
   const { cardId } = useParams();
 
   useEffect(() => {
-    const abrtCtrl = new AbortController();
-
     async function getDeck() {
-      const deckToSet = await readDeck(deckId, cardId, abrtCtrl.signal);
+      const deckToSet = await readDeck(deckId);
       setDeck(deckToSet);
-      setCard(deckToSet);
     }
     getDeck();
-  }, [deckId, cardId]);
+  }, []);
 
   if (deck.cards) {
     return (
       <div>
         <div>
           <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-              <li class="breadcrumb-item active" aria-current="page">
+            <ol className="breadcrumb">
+              <li className="breadcrumb-item active" aria-current="page">
                 <Link to={"/"}>
                   <span className="oi oi-home"> Home </span>
                 </Link>
               </li>
-              <li class="breadcrumb-item active" aria-current="page">
+              <li className="breadcrumb-item active" aria-current="page">
                 <Link to={`/decks/${deck.id}`}>{deck.name}</Link>
               </li>
             </ol>
@@ -72,7 +68,7 @@ function DeckView() {
                   <DeleteButton
                     destroy="deleteDeck"
                     deckId={deckId}
-                    abortSignal={AbortSignal}
+                    cardId={cardId}
                   />
                 </button>
               </div>

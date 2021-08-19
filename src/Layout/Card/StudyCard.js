@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
-//import { useHistory } from "react-router-dom";
 
 function StudyCard({ cards, index, setIndex, deckId }) {
   const [flip, setFlip] = useState(false);

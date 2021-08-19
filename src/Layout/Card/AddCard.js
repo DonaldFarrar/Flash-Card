@@ -18,6 +18,7 @@ function AddCard() {
 
   function doneButton() {
     history.push(`/decks/${deckId}`);
+    history.go(0);
   }
   return (
     <>
@@ -44,7 +45,7 @@ function AddCard() {
         deckName={deck.name}
         initialState={deck}
         onSubmit={submitButton}
-        onDone={doneButton}
+        deckId={deckId}
       />
     </>
   );

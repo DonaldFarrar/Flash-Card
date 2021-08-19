@@ -26,13 +26,11 @@ function DeckListItem({ deck: { id, name, description, cards }, index }) {
             </Link>
           </div>
           <div className="col d-flex justify-content-end p-0">
-            <button className="btn btn-danger">
-              <DeleteButton
-                destroy="deleteDeck"
-                deckId={id}
-                abortSignal={abortSignal}
-              />
-            </button>
+            <DeleteButton
+              destroy="deleteDeck"
+              deckId={id}
+              abortSignal={abortSignal}
+            />
           </div>
         </div>
       </div>

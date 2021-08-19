@@ -1,14 +1,16 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 function CardForm({
   toEdit,
   onSubmit,
-  onDone,
+  deckId,
   deckName = "Loading...",
   initialState,
   doneButtonLabel = "Done",
 }) {
   const [card, setCard] = useState(initialState);
+  const history = useHistory();
 
   function changeHandler(event) {
     event.preventDefault();
@@ -21,8 +23,10 @@ function CardForm({
   function submitHandler(event) {
     event.preventDefault();
     onSubmit(card);
-    onSubmit({ ...card });
+    // onSubmit({ ...card });
     setCard({ front: "", back: "" });
+    history.push(`/decks/${deckId}`);
+    history.go(0);
   }
 
   if (toEdit === false) {
@@ -57,11 +61,7 @@ function CardForm({
               />
             </div>
 
-            <button
-              className="btn btn-secondary mr-2"
-              onClick={onDone}
-              tabIndex="4"
-            >
+            <button className="btn btn-secondary mr-2" tabIndex="4">
               {doneButtonLabel}
             </button>
             <div onClick={submitHandler} className="btn btn-primary">
@@ -105,11 +105,7 @@ function CardForm({
               />
             </div>
 
-            <button
-              className="btn btn-secondary mr-2"
-              onClick={onDone}
-              tabIndex="4"
-            >
+            <button className="btn btn-secondary mr-2" tabIndex="4">
               {doneButtonLabel}
             </button>
             <div onClick={submitHandler} className="btn btn-primary">
