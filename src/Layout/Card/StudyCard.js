@@ -41,7 +41,8 @@ function StudyCard({ cards, index, setIndex, deckId }) {
     return (
       <div>
         <p>
-          <span>Need more cards!</span></p>
+          <span>Not enough cards</span>
+        </p>
         <Link className="btn btn-primary" to={`/decks/${deckId}/cards/new`}>
           <span className="oi oi-plus"></span> Add Cards
         </Link>
