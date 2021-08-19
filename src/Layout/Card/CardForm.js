@@ -1,32 +1,47 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
+import { createCard, updateCard } from "../../utils/api";
 
 function CardForm({
   toEdit,
-  onSubmit,
-  deckId,
   deckName = "Loading...",
-  initialState,
+  front = "front side of card",
+  back = "back side of card",
   doneButtonLabel = "Done",
+  deckId,
+  cardId = null,
 }) {
-  const [card, setCard] = useState(initialState);
+  const [card, setCard] = useState({
+    id: Number(cardId),
+    front: front,
+    back: back,
+    deckId: Number(deckId),
+  });
   const history = useHistory();
+  const abortController = new AbortController().signal;
 
   function changeHandler(event) {
     event.preventDefault();
+    console.log(event.target.value);
     setCard({
       ...card,
-      [event.target.id]: event.target.value,
+      [event.target.name]: event.target.value,
     });
   }
 
   function submitHandler(event) {
     event.preventDefault();
-    onSubmit(card);
-    // onSubmit({ ...card });
-    setCard({ front: "", back: "" });
-    history.push(`/decks/${deckId}`);
-    history.go(0);
+    console.log(card);
+    if (toEdit) {
+      updateCard(card, abortController).then((response) => {
+        console.log("response", response);
+        history.push(`/decks/${response.deckId}`);
+      });
+    } else {
+      createCard(deckId, card, abortController).then(() => {
+        history.go(0);
+      });
+    }
   }
 
   if (toEdit === false) {
@@ -41,10 +56,9 @@ function CardForm({
               <textarea
                 id="front"
                 name="front"
-                tabIndex="1"
                 className="form-control"
                 required={true}
-                placeholder="Enter text to display on the front of the card"
+                placeholder={front}
                 onChange={changeHandler}
               />
             </div>
@@ -53,17 +67,20 @@ function CardForm({
               <textarea
                 id="back"
                 name="back"
-                tabIndex="2"
                 className="form-control"
                 required={true}
-                placeholder="Enter text to display on the back of the card"
+                placeholder={back}
                 onChange={changeHandler}
               />
             </div>
 
-            <button className="btn btn-secondary mr-2" tabIndex="4">
-              {doneButtonLabel}
-            </button>
+            <Link
+              to={`/decks/${deckId}`}
+              className="btn btn-secondary mr-2"
+              tabIndex="4"
+            >
+              Done
+            </Link>
             <div onClick={submitHandler} className="btn btn-primary">
               Save
             </div>
@@ -83,11 +100,9 @@ function CardForm({
               <textarea
                 id="front"
                 name="front"
-                tabIndex="1"
                 className="form-control"
                 required={true}
-                //placeholder="Enter text to display on the front of the card"
-                defaultValue={card.front}
+                defaultValue={front}
                 onChange={changeHandler}
               />
             </div>
@@ -96,18 +111,20 @@ function CardForm({
               <textarea
                 id="back"
                 name="back"
-                tabIndex="2"
                 className="form-control"
                 required={true}
-                //placeholder="Enter text to display on the back of the card"
-                defaultValue={card.back}
+                defaultValue={back}
                 onChange={changeHandler}
               />
             </div>
 
-            <button className="btn btn-secondary mr-2" tabIndex="4">
-              {doneButtonLabel}
-            </button>
+            <Link
+              to={`/decks/${deckId}`}
+              className="btn btn-secondary mr-2"
+              tabIndex="4"
+            >
+              Done
+            </Link>
             <div onClick={submitHandler} className="btn btn-primary">
               Save
             </div>

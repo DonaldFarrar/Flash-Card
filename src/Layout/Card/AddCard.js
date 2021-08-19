@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { useHistory, useParams, Link } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { createCard, readDeck } from "../../utils/api";
 import CardForm from "./CardForm";
 
 function AddCard() {
-  const history = useHistory();
+  
   const { deckId } = useParams();
   const [deck, setDeck] = useState({ cards: [] });
 
@@ -16,14 +16,10 @@ function AddCard() {
     createCard(deckId, card);
   }
 
-  function doneButton() {
-    history.push(`/decks/${deckId}`);
-    history.go(0);
-  }
+
   return (
     <>
       <nav aria-label="breadcrumb">
-        c
         <ol class="breadcrumb">
           <li class="breadcrumb-item active" aria-current="page">
             <Link to={"/"}>
@@ -43,9 +39,9 @@ function AddCard() {
       </div>
       <CardForm
         deckName={deck.name}
-        initialState={deck}
         onSubmit={submitButton}
         deckId={deckId}
+        toEdit={false}
       />
     </>
   );

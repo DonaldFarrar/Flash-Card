@@ -9,6 +9,11 @@
       "name": "React Router",
       "description": "React Router is a collection of navigational components that compose declaratively with your application.",
       "id": 2
+    },
+    {
+      "name": "Dodger",
+      "description": "Dog",
+      "id": 3
     }
   ],
   "cards": [
@@ -48,6 +53,74 @@
       "back": "b",
       "deckId": 1,
       "id": 7
+    },
+    {
+      "cards": [],
+      "front": "Food for him",
+      "back": "Kibble",
+      "deckId": 3,
+      "id": 8
+    },
+    {
+      "cards": [],
+      "front": "Voice",
+      "back": "Woof bark",
+      "deckId": 3,
+      "id": 9
+    },
+    {
+      "id": 10,
+      "front": "Toy",
+      "back": "Purple pig",
+      "deckId": "3"
+    },
+    {
+      "id": 11,
+      "front": "Practice  card",
+      "back": "Card practice",
+      "deckId": "3"
+    },
+    {
+      "id": 12,
+      "front": "new asd",
+      "back": "cardasdc",
+      "deckId": "3"
+    },
+    {
+      "id": 13,
+      "front": "toy",
+      "back": "purple pig",
+      "deckId": "3"
+    },
+    {
+      "id": 14,
+      "front": "toy",
+      "back": "purpleman",
+      "deckId": "3"
+    },
+    {
+      "id": 15,
+      "front": "toy",
+      "back": "purple pig",
+      "deckId": "3"
+    },
+    {
+      "id": 16,
+      "front": "toy",
+      "back": "purple pig",
+      "deckId": "3"
+    },
+    {
+      "id": 17,
+      "front": "toy",
+      "back": "purple pig",
+      "deckId": "3"
+    },
+    {
+      "id": 18,
+      "front": "toy",
+      "back": "purple man",
+      "deckId": 3
     }
   ]
 }

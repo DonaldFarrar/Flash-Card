@@ -1,36 +1,38 @@
 import React, { useEffect, useState } from "react";
-import { useHistory, useParams } from "react-router-dom";
-import { readCard, readDeck, updateCard } from "../../utils/api";
+import { useParams } from "react-router-dom";
+import { readCard, readDeck } from "../../utils/api";
 import CardForm from "./CardForm";
 
 function EditCard() {
-  const history = useHistory();
   const { deckId, cardId } = useParams();
 
   const [card, setCard] = useState({ front: "", back: "" });
   const [deck, setDeck] = useState({ cards: [] });
 
   useEffect(() => {
-    readDeck(deckId).then(setDeck);
-    readCard(cardId).then(setCard);
-  }, [deckId, cardId]);
+    readDeck(deckId)
+      .then(setDeck)
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [deckId]);
 
-  function submitButton(card) {
-    updateCard(card).then(doneButton);
-  }
-
-  function doneButton() {
-    history.push(`/decks/${deckId}`);
-    history.go(0);
-  }
+  useEffect(() => {
+    readCard(cardId)
+      .then(setCard)
+      .catch((error) => {
+        console.log(error);
+      });
+  }, [deck, cardId]);
 
   const result = card.id ? (
     <CardForm
-      onSubmit={submitButton}
-      onDone={doneButton}
       deckName={deck.name}
-      initialState={card}
+      front={card.front}
+      back={card.back}
       toEdit={true}
+      deckId={deckId}
+      cardId={cardId}
       doneButtonLabel="Cancel"
     />
   ) : (

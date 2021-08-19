@@ -15,7 +15,7 @@ function DeckView() {
       setDeck(deckToSet);
     }
     getDeck();
-  }, []);
+  }, [deckId]);
 
   if (deck.cards) {
     return (
@@ -64,13 +64,13 @@ function DeckView() {
                 </Link>
               </div>
               <div className="col d-flex justify-content-end p-0">
-                <button className="btn btn-danger">
+                <div className="btn btn-danger">
                   <DeleteButton
                     destroy="deleteDeck"
                     deckId={deckId}
                     cardId={cardId}
                   />
-                </button>
+                </div>
               </div>
             </div>
           </div>
