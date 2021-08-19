@@ -24,7 +24,7 @@ function EditDeck() {
   }
 
   const result = deck.id ? (
-    <DeckForm onCancel={cancel} onSubmit={submitButton} initialState={deck} />
+    <DeckForm onCancel={cancel} onSubmit={submitButton} initialState={deck} toEdit={true}/>
   ) : (
     <p>Loading...</p>
   );

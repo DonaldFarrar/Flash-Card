@@ -30,7 +30,7 @@ function CreateDeck() {
       </nav>
 
       <h1>Create Deck</h1>
-      <DeckForm onCancel={cancel} onSubmit={submitHandler} />
+      <DeckForm onCancel={cancel} onSubmit={submitHandler} toEdit={false}/>
     </>
   );
 }

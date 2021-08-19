@@ -49,7 +49,7 @@ function DeckView() {
             <div className="row d-flex justify-content-between">
               <div className="col d-flex justify-content-start p-0">
                 <Link
-                  to={`/decks/${deck.id}/cards/${card.id}/edit`}
+                  to={`/decks/${deck.id}/edit`}
                   className="btn btn-secondary"
                 >
                   <span className="oi oi-eye"></span> Edit

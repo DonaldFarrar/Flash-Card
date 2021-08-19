@@ -1,9 +1,9 @@
 import React from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import DeleteButton from "./DeleteButton";
 
 function DeckListItem({ deck: { id, name, description, cards }, index }) {
-  const { deckId } = useParams();
+  const abortSignal = new AbortController().signal;
 
   return (
     //create a card with view, study and delete buttons
@@ -29,8 +29,8 @@ function DeckListItem({ deck: { id, name, description, cards }, index }) {
             <button className="btn btn-danger">
               <DeleteButton
                 destroy="deleteDeck"
-                deckId={deckId}
-                abortSignal={AbortSignal}
+                deckId={id}
+                abortSignal={abortSignal}
               />
             </button>
           </div>

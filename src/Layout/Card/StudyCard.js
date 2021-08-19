@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 //import { useHistory } from "react-router-dom";
 
-function StudyCard({ cards, index, setIndex, deckId, deck }) {
+function StudyCard({ cards, index, setIndex, deckId }) {
   const [flip, setFlip] = useState(false);
   const [showCard, setShowCard] = useState(true);
-  //const history = useHistory();
+  const history = useHistory();
 
   const flipButton = (event) => {
     event.preventDefault();
@@ -16,25 +16,38 @@ function StudyCard({ cards, index, setIndex, deckId, deck }) {
   };
 
   const nextButton = (event) => {
-    setFlip(!flip);
-    setIndex(index + 1);
+    if (index + 1 >= cards.length) {
+      studyAgain();
+    } else {
+      setFlip(!flip);
+      setIndex(index + 1);
+    }
   };
 
-  // function studyAgain() {
-  //   if (
-  //     window.confirm(
-  //       `Restart cards? \n\n Clicking cancel will return you to the home page`
-  //     )
-  //   ) {
-  //     setIndex(0);
-  //     setFlip(false);
-  //     setShowCard(true);
-  //   } else {
-  //     history.push("/");
-  //   }
-  // }
+  function studyAgain() {
+    if (
+      window.confirm(
+        `Restart cards? \n\n Clicking cancel will return you to the home page`
+      )
+    ) {
+      setIndex(0);
+      setFlip(false);
+      setShowCard(true);
+    } else {
+      history.push("/");
+    }
+  }
 
-  const ShowStudyCards = () => {
+  if (cards.length < 3) {
+    return (
+      <div>
+        <p>Need more cards!</p>
+        <Link className="btn btn-primary" to={`/decks/${deckId}/cards/new`}>
+          <span className="oi oi-plus"></span> Add Cards
+        </Link>
+      </div>
+    );
+  } else {
     return (
       <div className="card container">
         <div className="card-body">
@@ -63,17 +76,7 @@ function StudyCard({ cards, index, setIndex, deckId, deck }) {
         </div>
       </div>
     );
-  };
-
-  return (
-    <div>
-      {cards.length >= 3 ? <ShowStudyCards /> : <p>Need more cards!</p>}
-      <button className="btn btn-primary">
-        <span className="oi oi-plus"></span>Add Cards
-        {/* <Link to={`/decks/${deck.id}/cards/new`}></Link> */}
-      </button>
-    </div>
-  );
+  }
 }
 
 export default StudyCard;

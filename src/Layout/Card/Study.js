@@ -53,7 +53,7 @@ function Study() {
         <div>
           <div className="row">
             <div className="col-12">
-              <h1>{deck.name}: Study</h1>
+              <h1>Study: {deck.name}</h1>
             </div>
           </div>
           <div>
