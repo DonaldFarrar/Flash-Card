@@ -10,7 +10,7 @@ function DeckForm({
 
   function changeHandler(event) {
     event.preventDefault();
-    console.log(event.target);
+    //console.log(event.target);
     setDeck({
       ...deck,
       [event.target.id]: event.target.value,

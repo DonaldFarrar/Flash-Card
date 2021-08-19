@@ -23,17 +23,18 @@ function EditCard() {
     history.push(`/decks/${deck.id}`);
   }
 
-    const result = card.id ? (
-      <CardForm
-        onSubmit={submitButton}
-        onDone={doneButton}
-        deckName={deck.name}
-        initialState={card}
-        doneButtonLabel="Cancel"
-      />
-    ) : (
-      <p>Loading...</p>
-    );
+  const result = card.id ? (
+    <CardForm
+      onSubmit={submitButton}
+      onDone={doneButton}
+      deckName={deck.name}
+      initialState={card}
+      toEdit={true}
+      doneButtonLabel="Cancel"
+    />
+  ) : (
+    <p>Loading...</p>
+  );
   return (
     <>
       <h2>Edit Card</h2>
