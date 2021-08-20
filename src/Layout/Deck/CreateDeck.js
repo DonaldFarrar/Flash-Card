@@ -17,13 +17,13 @@ function CreateDeck() {
   return (
     <>
       <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item active" aria-current="page">
+        <ol className="breadcrumb">
+          <li className="breadcrumb-item active" aria-current="page">
             <Link to={"/"}>
               <span className="oi oi-home"> Home </span>
             </Link>
           </li>
-          <li class="breadcrumb-item active" aria-current="page">
+          <li className="breadcrumb-item active" aria-current="page">
             Create Deck
           </li>
         </ol>
