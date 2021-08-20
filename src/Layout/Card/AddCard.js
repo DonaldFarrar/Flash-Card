@@ -4,7 +4,6 @@ import { createCard, readDeck } from "../../utils/api";
 import CardForm from "./CardForm";
 
 function AddCard() {
-  
   const { deckId } = useParams();
   const [deck, setDeck] = useState({ cards: [] });
 
@@ -15,7 +14,6 @@ function AddCard() {
   function submitButton(card) {
     createCard(deckId, card);
   }
-
 
   return (
     <>
