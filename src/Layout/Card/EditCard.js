@@ -23,7 +23,7 @@ function EditCard() {
       .catch((error) => {
         console.log(error);
       });
-  }, [deck, cardId]);
+  }, [cardId]);
 
   const result = card.id ? (
     <CardForm
